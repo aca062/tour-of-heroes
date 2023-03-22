@@ -1,0 +1,31 @@
+<div *ngIf="hero">
+  <h2>{{ hero.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{ hero.id }}</div>
+  <div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name" />
+  </div>
+  <div>
+    <label for="hero-superPowers">Superpowers: </label>
+    <div>
+      <input id="hero-superPower-new" placeholder="New Superpower" />
+      <button type="button" (click)="addSuperpower()">Add</button>
+    </div>
+    <div
+      *ngFor="
+        let superPower of hero.superPowers;
+        let i = index;
+        trackBy: trackByFunction
+      "
+      class="list-superPower"
+    >
+      <input
+        id="{{ 'hero-superPower' + superPower + i }}"
+        [(ngModel)]="hero.superPowers[i]"
+        placeholder="Superpower"
+      />
+      <button type="button " (click)="deleteSuperpower(i)">Delete</button>
+    </div>
+  </div>
+  <button type="button" (click)="goBack()">Go back</button>
+</div>
